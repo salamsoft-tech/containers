@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
         matrix:
-            image: ${{ fromJson(needs.list-dockerfiles.outputs.matrix) }
+            image: ${{ fromJson(needs.list-dockerfiles.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
       - name: Get changed files in the image folder
