@@ -13,13 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Get changed files in the image folder
+      - name: Get changed file's directories
         id: changed-files
         uses: tj-actions/changed-files@v44
         with:
           dir_names: 'true'
 
-      - name: List changed image folders
+      - name: List changed image directories
         id: list-changed-images
         run: echo "matrix=$(find ${{ steps.changed-files.outputs.all_modified_files }} -type f -name Dockerfile -exec dirname {} \; | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
@@ -36,4 +36,4 @@ jobs:
         id: rolling-tags
         uses:  mikefarah/yq@v4
         with:
-          cmd: yq eval '.rolling-tags[]' ./${{ matrix.image }}/tags-info.yml
+          cmd: yq eval '.rolling-tags[]' ./${{ matrix.image }}/tags-info.yaml
