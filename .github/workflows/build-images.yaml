@@ -23,9 +23,12 @@ jobs:
         id: list-changed-images
         run: echo "matrix=$(find ${{ steps.changed-files.outputs.all_modified_files }} -type f -name Dockerfile -exec dirname {} \; | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
-  build-image:
+  build-and-push-image:
     needs: list-changed-images
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     strategy:
         matrix:
             image: ${{ fromJson(needs.list-changed-images.outputs.matrix) }}
