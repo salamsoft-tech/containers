@@ -37,7 +37,7 @@ jobs:
 
       - name: Read image info
         id: image-info
-        uses: pietrobolcato/action-read-yaml@1.0.0
+        uses: pietrobolcato/action-read-yaml@1.1.0
         with:
           config: ${{ matrix.image }}/image-info.yaml
 
