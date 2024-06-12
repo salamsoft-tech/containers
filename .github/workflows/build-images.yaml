@@ -37,3 +37,26 @@ jobs:
         uses:  mikefarah/yq@v4
         with:
           cmd: yq eval '.rolling-tags[]' ./${{ matrix.image }}/tags-info.yaml
+
+      - name: Docker metadata
+        id: docker-metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/salamsoft-tech/${{ matrix.image }}
+          tags: |
+            ${{ steps.rolling-tags.outputs.result }}
+            type=sha
+
+      - name: Login to registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ matrix.image }}
+          push: true
+          tags: ${{ steps.docker-metadata.outputs.tags }}

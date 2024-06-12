@@ -9,5 +9,5 @@ RUN apt-get update \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN /opt/bitnami/odoo/venv/bin/pip3 install \
-    # docxtpl \
+    docxtpl \
     jwt
