@@ -39,13 +39,13 @@ jobs:
         id: image-name
         uses: mikefarah/yq@v4
         with:
-          cmd: yq eval '.name' ./${{ matrix.image }}/tags-info.yaml
+          cmd: yq eval '.name' ./${{ matrix.image }}/image-info.yaml
 
       - name: Read image rolling-tags
         id: image-rolling-tags
         uses: mikefarah/yq@v4
         with:
-          cmd: yq eval '.rolling-tags[]' ./${{ matrix.image }}/tags-info.yaml
+          cmd: yq eval '.rolling-tags[]' ./${{ matrix.image }}/image-info.yaml
 
       - name: Docker metadata
         id: docker-metadata

@@ -11,4 +11,5 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN /opt/bitnami/odoo/venv/bin/pip3 install \
     docxtpl \
     jinja2 \
-    jwt
+    jwt \
+    num2words
