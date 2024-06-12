@@ -39,9 +39,7 @@ jobs:
         id: image-info
         uses: mikefarah/yq@v4
         with:
-          cmd: |
-            echo "name=$(yq eval '.name' ${{ matrix.image }}/image-info.yaml)" >> $GITHUB_OUTPUT \
-            echo "rolling-tags=$(yq eval '.rolling-tags[]' ${{ matrix.image }}/image-info.yaml)" >> $GITHUB_OUTPUT
+          cmd: echo "name=$(yq eval '.name' ${{ matrix.image }}/image-info.yaml)" >> $GITHUB_OUTPUT && echo "rolling-tags=$(yq eval '.rolling-tags[]' ${{ matrix.image }}/image-info.yaml)" >> $GITHUB_OUTPUT
 
       - name: Docker metadata
         id: docker-metadata
