@@ -35,19 +35,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Read rolling tags
-        id: rolling-tags
-        uses:  mikefarah/yq@v4
+      - name: Read image info
+        id: image-info
+        uses: pietrobolcato/action-read-yaml@1.0.0
         with:
-          cmd: yq eval '.rolling-tags[]' ./${{ matrix.image }}/tags-info.yaml
+          config: ${{ matrix.image }}/image-info.yaml
 
       - name: Docker metadata
         id: docker-metadata
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}/${{ matrix.image }}
+          images: ghcr.io/${{ github.repository_owner }}/${{ steps.image-info.outputs['name'] }}
           tags: |
-            ${{ steps.rolling-tags.outputs.result }}
+            ${{ steps.image-info.outputs['rolling-tags'] }}
             type=sha
 
       - name: Login to registry

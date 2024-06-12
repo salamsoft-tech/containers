@@ -1,3 +1,4 @@
+name: odoo
 rolling-tags:
   - "17"
   - "17.0"
