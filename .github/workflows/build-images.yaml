@@ -35,19 +35,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Read image info
-        id: image-info
+      - name: Read image name
+        id: image-name
         uses: mikefarah/yq@v4
         with:
-          cmd: echo "name=$(yq eval '.name' ${{ matrix.image }}/image-info.yaml)" >> $GITHUB_OUTPUT && echo "rolling-tags=$(yq eval '.rolling-tags[]' ${{ matrix.image }}/image-info.yaml)" >> $GITHUB_OUTPUT
+          cmd: yq eval '.name' ./${{ matrix.image }}/tags-info.yaml
+
+      - name: Read image rolling-tags
+        id: image-rolling-tags
+        uses: mikefarah/yq@v4
+        with:
+          cmd: yq eval '.rolling-tags[]' ./${{ matrix.image }}/tags-info.yaml
 
       - name: Docker metadata
         id: docker-metadata
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/${{ steps.image-info.outputs.name }}
+          images: ghcr.io/${{ github.repository_owner }}/${{ steps.image-name.outputs.result }}
           tags: |
-            ${{ steps.image-info.outputs.rolling-tags }}
+            ${{ steps.image-rolling-tags.outputs.result }}
             type=sha
 
       - name: Login to registry
