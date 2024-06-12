@@ -37,20 +37,19 @@ jobs:
 
       - name: Read image info
         id: image-info
-        uses: actions-tools/yaml-outputs@v2
+        uses: mikefarah/yq@v4
         with:
-          file-path: ${{ matrix.image }}/image-info.yaml
-
-      - name: print image-info
-        run: echo ${{ steps.image-info.outputs['name'] }} ${{ steps.image-info.outputs['rolling-tags'] }}
+          cmd: |
+            echo "name=$(yq eval '.name' ${{ matrix.image }}/image-info.yaml)" >> $GITHUB_OUTPUT
+            echo "rolling-tags=$(yq eval '.rolling-tags[]' ${{ matrix.image }}/image-info.yaml)" >> $GITHUB_OUTPUT
 
       - name: Docker metadata
         id: docker-metadata
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/${{ steps.image-info.outputs['name'] }}
+          images: ghcr.io/${{ github.repository_owner }}/${{ steps.image-info.outputs.name }}
           tags: |
-            ${{ steps.image-info.outputs['rolling-tags.array'] }}
+            ${{ steps.image-info.outputs.rolling-tags }}
             type=sha
 
       - name: Login to registry
