@@ -41,6 +41,9 @@ jobs:
         with:
           config: ${{ matrix.image }}/image-info.yaml
 
+      - name: print image-info
+        run: echo ${{ steps.image-info.outputs['rolling-tags.array'] }} ${{ steps.image-info.outputs['rolling-tags'] }}
+
       - name: Docker metadata
         id: docker-metadata
         uses: docker/metadata-action@v5
