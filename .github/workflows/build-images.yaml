@@ -42,7 +42,7 @@ jobs:
         id: docker-metadata
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/salamsoft-tech/${{ matrix.image }}
+          images: ghcr.io/${{ github.repository }}/${{ matrix.image }}
           tags: |
             ${{ steps.rolling-tags.outputs.result }}
             type=sha
