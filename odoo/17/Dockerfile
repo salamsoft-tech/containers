@@ -13,3 +13,6 @@ RUN /opt/bitnami/odoo/venv/bin/pip3 install \
     jinja2 \
     jwt \
     num2words
+
+# Replace deprecated longpolling_port with gevent_port
+RUN sed -i -E -e 's/longpolling_port/gevent_port/' /opt/bitnami/scripts/odoo/bitnami-templates/odoo.conf.tpl
