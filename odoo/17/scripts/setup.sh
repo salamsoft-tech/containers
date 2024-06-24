@@ -14,7 +14,8 @@ postgresql_check_connection \
     $ODOO_DATABASE_PORT \
     postgres \
     $ODOO_DATABASE_USER \
-    $ODOO_DATABASE_PASSWORD
+    $ODOO_DATABASE_PASSWORD \
+    30
 
 echo "Generating configuration file" 
 odoo_apply_config_template $ODOO_CONF_TEMPLATE_FILE > $ODOO_CONF_FILE
