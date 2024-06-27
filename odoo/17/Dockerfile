@@ -55,6 +55,7 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
 RUN pip3 install --upgrade --break-system-packages \
     docxtpl \
     jwt \
+    phonenumbers \
     reportlab
 
 RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
