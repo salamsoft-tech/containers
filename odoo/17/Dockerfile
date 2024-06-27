@@ -75,6 +75,8 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
         rm -r ${REPO} ; \
     done
 
+ADD addons/*.xz /opt/apps-addons
+
 ENTRYPOINT ["/opt/scripts/entrypoint.sh"]
 CMD ["/opt/scripts/run.sh"]
 
