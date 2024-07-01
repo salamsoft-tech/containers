@@ -21,7 +21,7 @@ echo "Generating configuration file"
 odoo_apply_config_template $ODOO_CONF_TEMPLATE_FILE > $ODOO_CONF_FILE
 
 if [[ $ODOO_SKIP_BOOTSTRAP == "no" ]]; then
-    table_count=`echo "\dt" | postgresql_exec \
+    table_count=`echo "\dt res_partner" | postgresql_exec \
         $ODOO_DATABASE_HOST \
         $ODOO_DATABASE_PORT \
         $ODOO_DATABASE_NAME \
