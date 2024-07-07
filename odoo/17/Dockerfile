@@ -55,6 +55,7 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
 RUN pip3 install --upgrade --break-system-packages \
     docxtpl \
     jwt \
+    openpyxl \
     phonenumbers \
     reportlab
 
