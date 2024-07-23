@@ -20,7 +20,7 @@ postgresql_check_connection \
 echo "Generating configuration file" 
 odoo_apply_config_template $ODOO_CONF_TEMPLATE_FILE > $ODOO_CONF_FILE
 
-if [[ $ODOO_SKIP_BOOTSTRAP == "no" ]]; then
+if [[ $ODOO_SKIP_BOOTSTRAP == "false" ]]; then
     table_count=`echo "\dt res_partner" | postgresql_exec \
         $ODOO_DATABASE_HOST \
         $ODOO_DATABASE_PORT \

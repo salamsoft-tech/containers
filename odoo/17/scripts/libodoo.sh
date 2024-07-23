@@ -22,7 +22,7 @@ odoo_install() {
 
     with_demo_data=${1:-no}
 
-    if [[ $with_demo_data == "no" ]]; then
+    if [[ $with_demo_data == "false" ]]; then
         init_args+=("--without-demo=all")
     fi
 

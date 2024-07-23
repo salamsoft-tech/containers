@@ -47,5 +47,5 @@ services:
 | `ODOO_DATABASE_PASSWORD` | Database user password, `required` | `nil` |
 | `ODOO_EMAIL` | Odoo user email | `admin@example.com` |
 | `ODOO_PASSWORD` | Odoo user password | `odooadmin` |
-| `ODOO_SKIP_BOOTSTRAP` | Whether to perform initial bootstrapping for the application | `no` |
-| `ODOO_LOAD_DEMO_DATA` | Whether to load demo data | `no` |
+| `ODOO_SKIP_BOOTSTRAP` | Whether to perform initial bootstrapping for the application | `false` |
+| `ODOO_LOAD_DEMO_DATA` | Whether to load demo data | `false` |
