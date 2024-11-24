@@ -1,4 +1,4 @@
-FROM ubuntu:noble-20241011
+FROM ubuntu:noble-20241015
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
