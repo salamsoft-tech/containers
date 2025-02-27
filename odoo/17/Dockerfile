@@ -1,4 +1,4 @@
-FROM ubuntu:noble-20241015
+FROM ubuntu:noble-20250127
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
@@ -29,7 +29,7 @@ RUN apt-get update && \
 
 # Install Node
 ENV NODE_VERSION 20
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 ARG TARGETARCH
 
@@ -46,7 +46,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 ENV ODOO_VERSION 17.0
-ARG ODOO_RELEASE=20241209
+ARG ODOO_RELEASE=20250218
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
     && apt-get update \
     && apt-get -y install --no-install-recommends ./odoo.deb \
@@ -61,6 +61,7 @@ RUN pip3 install --upgrade --break-system-packages \
 
 RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
     OCA_REPOS=( \
+        account-financial-tools \
     	currency \
         hr \
         partner-contact \
