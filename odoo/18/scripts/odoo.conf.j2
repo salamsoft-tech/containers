@@ -1,0 +1,12 @@
+[options]
+addons_path = /opt/apps-addons,/opt/oca-addons,/mnt/extra-addons
+data_dir = /var/lib/odoo
+db_host = {{ODOO_DATABASE_HOST}}
+db_port = {{ODOO_DATABASE_PORT}}
+db_user = {{ODOO_DATABASE_USER}}
+db_password = {{ODOO_DATABASE_PASSWORD}}
+db_name = {{ODOO_DATABASE_NAME}}
+; Odoo will always be running behind a proxy (e.g. Docker or Apache)
+proxy_mode = True
+email_from = {{ODOO_EMAIL}}
+admin_passwd = {{ODOO_PASSWORD}}
