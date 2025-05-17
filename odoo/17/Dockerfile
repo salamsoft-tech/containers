@@ -1,4 +1,4 @@
-FROM ubuntu:noble-20250127
+FROM ubuntu:noble-20250415.1
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
@@ -65,6 +65,7 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
     	currency \
         hr \
         partner-contact \
+        payroll \
         reporting-engine \
         server-auth \
         server-backend \
