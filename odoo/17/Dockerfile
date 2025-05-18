@@ -74,7 +74,7 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
         web \
     ) && \
     for REPO in "${OCA_REPOS[@]}"; do \
-        repo_dir=`mktemp -d`
+        repo_dir=`mktemp -d` && \
         git clone --depth 1 --branch ${ODOO_VERSION} https://github.com/OCA/${REPO}.git ${repo_dir} && \
         mv `find ${repo_dir} -type f -name '__manifest__.py' -exec dirname {} \;` . && \
         rm -r ${repo_dir} ; \
