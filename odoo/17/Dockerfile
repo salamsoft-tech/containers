@@ -46,7 +46,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 ENV ODOO_VERSION 17.0
-ARG ODOO_RELEASE=20250218
+ARG ODOO_RELEASE=20250517
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
     && apt-get update \
     && apt-get -y install --no-install-recommends ./odoo.deb \
@@ -74,9 +74,10 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
         web \
     ) && \
     for REPO in "${OCA_REPOS[@]}"; do \
-        git clone --depth 1 --branch 17.0 https://github.com/OCA/${REPO}.git && \
-        mv `find ${REPO} -type f -name '__manifest__.py' -exec dirname {} \;` . && \
-        rm -r ${REPO} ; \
+        repo_dir=`mktemp -d`
+        git clone --depth 1 --branch ${ODOO_VERSION} https://github.com/OCA/${REPO}.git ${repo_dir} && \
+        mv `find ${repo_dir} -type f -name '__manifest__.py' -exec dirname {} \;` . && \
+        rm -r ${repo_dir} ; \
     done
 
 ADD addons/*.xz /opt/apps-addons
