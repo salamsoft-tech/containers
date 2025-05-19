@@ -25,7 +25,6 @@ jobs:
 
   build:
     # needs: list-changed-images
-    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -37,6 +36,12 @@ jobs:
         platform:
           - linux/amd64
           - linux/arm64
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-24.04
+          - platform: linux/arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
 
