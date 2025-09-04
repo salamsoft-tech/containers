@@ -1,4 +1,4 @@
-FROM ubuntu:noble-20250415.1
+FROM ubuntu:noble-20250805
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
@@ -46,7 +46,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 ENV ODOO_VERSION 18.0
-ARG ODOO_RELEASE=20250517
+ARG ODOO_RELEASE=20250819
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
     && apt-get update \
     && apt-get -y install --no-install-recommends ./odoo.deb \
@@ -79,6 +79,8 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
         mv `find ${repo_dir} -type f -name '__manifest__.py' -exec dirname {} \;` . && \
         rm -r ${repo_dir} ; \
     done
+
+RUN mkdir /opt/apps-addons
 
 ENTRYPOINT ["/opt/scripts/entrypoint.sh"]
 CMD ["/opt/scripts/run.sh"]
