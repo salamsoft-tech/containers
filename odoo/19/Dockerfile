@@ -1,4 +1,4 @@
-FROM ubuntu:noble-20251013
+FROM debian:trixie-20251229-slim
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
@@ -10,6 +10,7 @@ ENV LANG=en_US.UTF-8
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        python3-pip \
         postgresql-common \
         ca-certificates \
         curl \
@@ -31,24 +32,22 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | b
 ENV WKHTMLTOPDF_REPO=https://github.com/wkhtmltopdf/packaging
 ARG TARGETARCH
 RUN apt-get update && \
-    apt-get install -y  --no-install-recommends \
-        python3-pip \
-        python3-lxml-html-clean && \
     if [ -z "${TARGETARCH}" ]; then \
         TARGETARCH="$(dpkg --print-architecture)"; \
     fi; \
     WKHTMLTOPDF_ARCH=${TARGETARCH} && \
-    curl -sSL ${WKHTMLTOPDF_REPO}/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
+    curl -sSL ${WKHTMLTOPDF_REPO}/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_${WKHTMLTOPDF_ARCH}.deb \
         -o wkhtmltox.deb && \
     apt-get install -y --no-install-recommends ./wkhtmltox.deb &&\
     rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 ENV ODOO_VERSION=19.0
-ARG ODOO_RELEASE=20251208
+ARG ODOO_RELEASE=20260103
+COPY python3-pypdf2_5_all.deb .
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb && \
     apt-get update && \
-    apt-get -y install --no-install-recommends ./odoo.deb && \
-    rm -rf /var/lib/apt/lists/* odoo.deb
+    apt-get -y install --no-install-recommends ./python3-pypdf2_5_all.deb ./odoo.deb && \
+    rm -rf /var/lib/apt/lists/* *.deb
 
 RUN pip3 install --upgrade --break-system-packages \
     docxtpl \
