@@ -42,7 +42,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 ENV ODOO_VERSION=19.0
-ARG ODOO_RELEASE=20260103
+ARG ODOO_RELEASE=20260124
 COPY python3-pypdf2_5_all.deb .
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb && \
     apt-get update && \
@@ -53,7 +53,8 @@ RUN pip3 install --upgrade --break-system-packages \
     docxtpl \
     jwt \
     openpyxl \
-    phonenumbers
+    phonenumbers \
+    python-barcode
 
 RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
     OCA_REPOS=( \
@@ -68,6 +69,7 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
         server-tools \
         server-ux \
         web \
+        stock-logistics-barcode \
     ) && \
     for REPO in "${OCA_REPOS[@]}"; do \
         repo_dir=`mktemp -d` && \
