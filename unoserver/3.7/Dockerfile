@@ -1,23 +1,12 @@
-FROM eclipse-temurin:24.0.1_9-jdk-alpine-3.21
+FROM alpine:3.24.1
 
-# renovate: pypi: unoserver
 ARG VERSION_UNOSERVER=3.7
-
-LABEL org.opencontainers.image.title="unoserver-docker"
-LABEL org.opencontainers.image.description="Container image that contains unoserver and libreoffice including large set of fonts for file format conversions"
-LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.documentation="https://github.com/unoconv/unoserver-docker/blob/main/README.adoc"
-LABEL org.opencontainers.image.source="https://github.com/unoconv/unoserver-docker"
-LABEL org.opencontainers.image.url="https://github.com/unoconv/unoserver-docker"
 
 WORKDIR /
 
 RUN apk add --no-cache \
-    bash curl \
     py3-pip \
-    libreoffice && \
-    # base image pins libexpat older than its python3 was built against; bump it
-    apk upgrade --no-cache --available libexpat
+    libreoffice
 
 # fonts - https://wiki.alpinelinux.org/wiki/Fonts
 RUN apk add --no-cache \
@@ -33,8 +22,6 @@ RUN apk add --no-cache \
     ttf-opensans   \
     fontconfig && \
     fc-cache -f
-
-RUN rm -rf /var/cache/apk/* /tmp/*
 
 # https://github.com/unoconv/unoserver/
 RUN pip install --break-system-packages -U unoserver==${VERSION_UNOSERVER}

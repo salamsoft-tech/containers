@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 set -e -u
 
 echo "using: $(libreoffice --version)"

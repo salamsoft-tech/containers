@@ -1,0 +1,5 @@
+name: unoserver
+rolling-tags:
+  - "3.7"
+  - "3.7-alpine-3.24"
+  - "3.7-alpine-3.24.1"
