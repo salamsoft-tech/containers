@@ -1,4 +1,4 @@
-FROM debian:trixie-20260518-slim
+FROM debian:trixie-20260623-slim
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
@@ -42,7 +42,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 ENV ODOO_VERSION=19.0
-ARG ODOO_RELEASE=20260607
+ARG ODOO_RELEASE=20260710
 COPY python3-pypdf2_5_all.deb .
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb && \
     apt-get update && \
@@ -62,6 +62,7 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
         account-financial-tools \
         currency \
         hr \
+        l10n-thailand \
         partner-contact \
         payroll \
         product-attribute \
