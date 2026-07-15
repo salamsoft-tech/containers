@@ -6,6 +6,7 @@ WORKDIR /
 
 RUN apk add --no-cache \
     py3-pip \
+    icu-data-full \
     libreoffice
 
 # fonts - https://wiki.alpinelinux.org/wiki/Fonts
