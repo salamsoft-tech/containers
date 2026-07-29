@@ -1,0 +1,3 @@
+name: odoo
+rolling-tags:
+  - "18.0.20260728-ou1"
