@@ -74,6 +74,7 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
         server-ux \
         web \
         stock-logistics-barcode \
+        spreadsheet \
     ) && \
     for REPO in "${OCA_REPOS[@]}"; do \
         repo_dir=`mktemp -d` && \
