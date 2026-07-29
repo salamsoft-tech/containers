@@ -46,7 +46,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 ENV ODOO_VERSION 18.0
-ARG ODOO_RELEASE=20260124
+ARG ODOO_RELEASE=20260728
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
     && apt-get update \
     && apt-get -y install --no-install-recommends ./odoo.deb \
@@ -74,6 +74,7 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
         server-ux \
         web \
         stock-logistics-barcode \
+        spreadsheet \
     ) && \
     for REPO in "${OCA_REPOS[@]}"; do \
         repo_dir=`mktemp -d` && \
