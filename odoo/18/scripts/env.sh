@@ -14,3 +14,4 @@ export ODOO_LIMIT_TIME_REAL="${ODOO_LIMIT_TIME_REAL:-1200}"
 #
 export ODOO_EMAIL="${ODOO_EMAIL:-admin@example.com}"
 export ODOO_PASSWORD="${ODOO_PASSWORD:-odooadmin}"
+export ODOO_SERVER_WIDE_MODULES="${ODOO_SERVER_WIDE_MODULES:-base,web,kube_healthcheck}"

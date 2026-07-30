@@ -84,6 +84,7 @@ RUN mkdir -p /opt/oca-addons && cd /opt/oca-addons && \
     done
 
 RUN mkdir /opt/apps-addons
+COPY addons /opt/apps-addons
 
 ENTRYPOINT ["/opt/scripts/entrypoint.sh"]
 CMD ["/opt/scripts/run.sh"]
