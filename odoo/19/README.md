@@ -9,7 +9,7 @@
 ```yaml
 services:
   odoo:
-    image: ghcr.io/salamsoft-tech/odoo:18.0
+    image: ghcr.io/salamsoft-tech/odoo:19.0
     volumes:
       - ./odoo_data:/var/lib/odoo
     ports:
@@ -22,7 +22,7 @@ services:
       - ODOO_DATABASE_NAME=erp
       - ODOO_DATABASE_PASSWORD=testmenot
   db:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     volumes:
       - ./db_data:/var/lib/postgresql/data
     environment:
