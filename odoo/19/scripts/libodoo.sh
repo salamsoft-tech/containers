@@ -14,6 +14,17 @@ odoo_apply_config_template() {
 }
 
 ############################
+# Whether a value is truthy, case-insensitively
+# Arguments:
+#   $1 - value
+odoo_is_true() {
+    case "${1:-}" in
+        [Tt][Rr][Uu][Ee] | [Yy][Ee][Ss] | [Oo][Nn] | 1) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
+############################
 # Arguments:
 #   $1 - with demo data
 odoo_install() {
@@ -22,8 +33,10 @@ odoo_install() {
 
     with_demo_data=${1:-no}
 
-    if [[ $with_demo_data == "false" ]]; then
-        init_args+=("--without-demo=all")
+    # Since 19.0 demo data is opt-in: --with-demo is a flag and no demo data is
+    # the default, replacing the module-list form of --without-demo
+    if odoo_is_true "$with_demo_data"; then
+        init_args+=("--with-demo")
     fi
 
     odoo --config $ODOO_CONF_FILE ${init_args[@]}
