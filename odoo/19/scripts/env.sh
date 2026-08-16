@@ -5,6 +5,7 @@ set -o nounset
 set -o pipefail
 
 export ODOO_DATABASE_PORT="${ODOO_PORT_NUMBER:-5432}"
+export ODOO_DATABASE_MAXCONN="${ODOO_DATABASE_MAXCONN:-64}"
 export ODOO_CONF_TEMPLATE_FILE="/opt/scripts/odoo.conf.j2"
 export ODOO_CONF_FILE="/etc/odoo/odoo.conf"
 export ODOO_SERVER_WIDE_MODULES="${ODOO_SERVER_WIDE_MODULES:-base,web,kube_healthcheck}"
