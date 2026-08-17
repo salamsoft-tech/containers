@@ -9,7 +9,7 @@
 ```yaml
 services:
   odoo:
-    image: ghcr.io/salamsoft-tech/odoo:18.0
+    image: ghcr.io/salamsoft-tech/odoo:19.0
     volumes:
       - ./odoo_data:/var/lib/odoo
     ports:
@@ -22,7 +22,7 @@ services:
       - ODOO_DATABASE_NAME=erp
       - ODOO_DATABASE_PASSWORD=testmenot
   db:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     volumes:
       - ./db_data:/var/lib/postgresql/data
     environment:
@@ -45,6 +45,7 @@ services:
 | `ODOO_DATABASE_PORT` | Database server port | `5432` |
 | `ODOO_DATABASE_USER` | Database user name, `required` | `nil` |
 | `ODOO_DATABASE_PASSWORD` | Database user password, `required` | `nil` |
+| `ODOO_DATABASE_MAXCONN` | Maximum number of physical connections to PostgreSQL | `64` |
 | `ODOO_EMAIL` | Odoo user email | `admin@example.com` |
 | `ODOO_PASSWORD` | Odoo user password | `odooadmin` |
 | `ODOO_SKIP_BOOTSTRAP` | Whether to perform initial bootstrapping for the application | `false` |
