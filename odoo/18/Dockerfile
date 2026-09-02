@@ -56,6 +56,7 @@ RUN pip3 install --upgrade --break-system-packages \
     docxtpl \
     jwt \
     openpyxl \
+    openupgradelib \
     phonenumbers \
     reportlab \
     python-barcode
