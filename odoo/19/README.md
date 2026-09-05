@@ -35,7 +35,23 @@ services:
 | Name | Description |
 |------|-------------|
 | `/var/lib/odoo` | Odoo data directory |
-| `/mnt/extra-addons` | Your extra addons go here |
+| `/mnt/extra-addons` | Your extra addons go here, searched before the bundled ones |
+
+### Addons path
+
+Modules are searched in this order, and the **first match wins**:
+
+1. `$ODOO_EXTRA_ADDONS_PATH` (`/mnt/extra-addons` by default)
+2. `/opt/bundle-addons` — addons shipped with this image
+3. `/opt/oca-addons` — OCA repositories vendored at build time
+
+Mounting a module at `/mnt/extra-addons` therefore overrides a bundled or OCA
+copy of the same name. Odoo's own standard modules always take precedence over
+all of the above and cannot be shadowed this way.
+
+Note that a same-named module is picked up silently, and Odoo only reloads it
+when the manifest version differs from the installed one — deploy an override
+with an explicit `-u <module>`.
 
 ### Environment variables
 
@@ -50,3 +66,4 @@ services:
 | `ODOO_PASSWORD` | Odoo user password | `odooadmin` |
 | `ODOO_SKIP_BOOTSTRAP` | Whether to perform initial bootstrapping for the application | `false` |
 | `ODOO_LOAD_DEMO_DATA` | Whether to load demo data | `false` |
+| `ODOO_EXTRA_ADDONS_PATH` | Addons directory searched before the bundled ones | `/mnt/extra-addons` |
