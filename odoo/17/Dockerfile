@@ -53,6 +53,7 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
     && rm -rf /var/lib/apt/lists/* odoo.deb
 
 RUN pip3 install --upgrade --break-system-packages \
+    click-odoo-contrib \
     docxtpl \
     jwt \
     openpyxl \
